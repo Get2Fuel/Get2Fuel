@@ -18,7 +18,6 @@ formBody = formBody.join("&");
 const App = () => {
    useEffect(async ()=>{
     const string = "https://fathomless-chamber-48058.herokuapp.com/"+"https://carburanti.mise.gov.it/OssPrezziSearch/ricerca/position?" + formBody
-    console.log(string);
     const response = await fetch(string,{
       method:'POST',
       headers:{
