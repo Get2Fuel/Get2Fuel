@@ -1,40 +1,31 @@
-import React, { useEffect } from "react";
+import React from "react";
+import ApiCall from "./ApiCall";
 
-
-var details = {
-  "pointsListStr": "45.70846176147461-9.313352584838867",
-  "carb": "1-0",
-  "ordPrice": "asc"
-}
-
-var formBody = [];
-for (var property in details) {
-  var encodedKey = encodeURIComponent(property);
-  var encodedValue = encodeURIComponent(details[property]);
-  formBody.push(encodedKey + "=" + encodedValue);
-}
-formBody = formBody.join("&");
-
-const App = () => {
-   useEffect(async ()=>{
-    const string = "https://fathomless-chamber-48058.herokuapp.com/"+"https://carburanti.mise.gov.it/OssPrezziSearch/ricerca/position?" + formBody
-    const response = await fetch(string,{
-      method:'POST',
-      headers:{
-        'Content-Type': 'application/x-www-form-urlencoded',    
-      }
-    });
-    const data = await response.json();
-    console.log(data);
-    
-    // const [stations] = data.results;
-    // console.log(data.results);
-  }, []);
-  return (
-    <div className="App">
-      <p>wasd</p>
-    </div>
-  );
+export class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      pos:null
+    };
+  }
+   componentDidMount(){
+    if (navigator.geolocation){
+      navigator.geolocation.watchPosition((position)=>{
+         //console.log("lat: ", position);
+        // console.log("long: ", position.coords.longitude);
+        this.setState({pos:position});
+      })
+    }else{
+      console.log("devi darmi la posizione");
+    }
+  }
+  render (){
+    return (
+      <div className="App">
+        <ApiCall props={this.state}/>
+      </div>
+    );
+  }
 };
 
 export default App;
