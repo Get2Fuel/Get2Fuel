@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 
 export default function ApiCall({ props }) {
-    if (props.pos) {
-        console.log(props.pos.coords.latitude);
-        console.log(props.pos.coords.longitude);
+    if (props && props.position) {
+        console.log(props.position.coords.latitude);
+        console.log(props.position.coords.longitude);
         var details = {
-            "pointsListStr": props.pos.coords.latitude + "-" + props.pos.coords.longitude,
+            "pointsListStr": parseFloat(props.position.coords.latitude) + "-" + parseFloat(props.position.coords.longitude),
             "carb": "1-0",
-            "ordPrice": "asc"
+            //"ordPrice": "asc"
         }
 
         var formBody = [];
@@ -19,7 +19,7 @@ export default function ApiCall({ props }) {
         formBody = formBody.join("&");
     }
     useEffect(async () => {
-        if (props.pos) {
+        if (props && props.position) {
             const string = "https://fathomless-chamber-48058.herokuapp.com/https://carburanti.mise.gov.it/OssPrezziSearch/ricerca/position?" + formBody
             const response = await fetch(string, {
                 method: 'POST',
@@ -35,7 +35,6 @@ export default function ApiCall({ props }) {
     }, [formBody]);
     return (
         <div className="ApiCall">
-            <p>wasd</p>
         </div>
     );
 };
