@@ -1,8 +1,21 @@
 # Get2Fuel
 
+## TO-DO
+
+- add pump details modal
+- check number of requests
+
 ---
 
 ## Commits history
+
+### 2021-09-24
+
+#### Added POI in map
+
+- the map correctly shows the pumps around you
+- the URL used to fetch the pumps has a temporarly IP address instead of `localhost`, so you can test it also on other devices
+- updated README.md
 
 ### 2021-09-14
 
