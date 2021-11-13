@@ -4,10 +4,20 @@
 
 - add pump details modal
 - check number of requests
+- correct mapbox layer not loading
 
 ---
 
 ## Commits history
+
+### 2021-11-13
+
+#### First build
+
+- clicking the pump poi brings you to google maps poi
+- set up API server
+- app is ready for deployment
+- updated README.md
 
 ### 2021-09-24
 

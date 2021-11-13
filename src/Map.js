@@ -1,5 +1,16 @@
 import React, { useState } from "react";
 import ReactMapGL, { GeolocateControl, Marker } from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+
+// eslint-disable-next-line import/no-webpack-loader-syntax
+// import mapboxgl from "!mapbox-gl";
+
+// The following is required to stop "npm build" from transpiling mapbox code.
+// notice the exclamation point in the import.
+
+// eslint-disable-next-line import/no-webpack-loader-syntax
+// mapboxgl.workerClass =
+//   require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
 const geolocateControlStyle = {
   right: 10,
@@ -19,7 +30,7 @@ function Map() {
 
   const fetchPumps = async (nextViewport) => {
     const rawResponse = await fetch(
-      `http://192.168.1.73:3100/geolocate/${nextViewport.latitude}/${nextViewport.longitude}/gasoline/any/`
+      `http://93.45.42.51:61234/geolocate/${nextViewport.latitude}/${nextViewport.longitude}/gasoline/any/`
     );
     const response = await rawResponse.json();
     setPumps(response.pumps);
@@ -44,9 +55,27 @@ function Map() {
         trackUserLocation={true}
         auto
       />
-      {pumps.map((pump) => (
-        <Marker latitude={+pump.lat} longitude={+pump.lon}>
-          <button className={"poi"}>Pump</button>
+      {pumps.map((pump, id) => (
+        <Marker latitude={+pump.lat} longitude={+pump.lon} key={id}>
+          <a
+            style={{
+              backgroundColor: "white",
+              padding: "4px",
+              borderRadius: "4px",
+              textDecoration: "none",
+              color: "black",
+            }}
+            href={
+              "https://www.google.com/maps/search/?api=1&query=" +
+              pump.lat +
+              "," +
+              pump.lon
+            }
+            target="_blank"
+            className={"poi"}
+          >
+            {pump.fuels.gasoline.self}
+          </a>
         </Marker>
       ))}
     </ReactMapGL>
