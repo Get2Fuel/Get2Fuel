@@ -4,11 +4,17 @@
 
 - add pump details modal
 - check number of requests
-- correct mapbox layer not loading
 
 ---
 
 ## Commits history
+
+### 2021-11-13
+
+#### Map works
+
+- Corrected mapbox layer not loading
+- updated README.md
 
 ### 2021-11-13
 

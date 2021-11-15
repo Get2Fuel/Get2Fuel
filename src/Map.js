@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ReactMapGL, { GeolocateControl, Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-// eslint-disable-next-line import/no-webpack-loader-syntax
 // import mapboxgl from "!mapbox-gl";
 
 // The following is required to stop "npm build" from transpiling mapbox code.
@@ -72,6 +71,7 @@ function Map() {
               pump.lon
             }
             target="_blank"
+            rel="noreferrer"
             className={"poi"}
           >
             {pump.fuels.gasoline.self}
